@@ -1,14 +1,16 @@
+//Pet class that stores the name and age
 public class Pet {
-    private int id;
+    // Class Variables
     private String name;
     private int age;
 
-    public Pet(int id, String name, int age) {
-        this.id = id;
+    // Required Constructor
+    public Pet(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
+    // Setters and Getter methods
     public void setName(String name) {
         this.name = name;
     }
@@ -23,13 +25,5 @@ public class Pet {
 
     public int getAge() {
         return age;
-    }
-
-    public void setID(int id) {
-        this.id = id;
-    }
-
-    public int getID() {
-        return id;
     }
 }
