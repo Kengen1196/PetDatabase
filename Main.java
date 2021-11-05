@@ -11,7 +11,6 @@ public class Main {
         String[] line;
         String name;
         int age;
-        int id;
         // Opening message
         System.out.println("Pet Database Program");
         // Loops until it is changed
@@ -38,25 +37,6 @@ public class Main {
                 age = Integer.valueOf(line[1]);
                 database.addPets(name, age);
                 break;
-            // Updates pet in array
-            case 3:
-                System.out.print("Enter the pet ID you want to update: ");
-                id = input.nextInt();
-                input.nextLine();
-                System.out.print("Enter new name and new age: ");
-                // split input line by space as it is assumed both are given
-                line = input.nextLine().split(" ");
-                name = line[0];
-                age = Integer.valueOf(line[1]);
-                database.updatePet(id, name, age);
-                break;
-            // Removes pet in array
-            case 4:
-                System.out.print("Enter the pet ID you want to remove: ");
-                id = input.nextInt();
-                input.nextLine();
-                database.removePet(id);
-                // Search pet by name
             case 5:
                 System.out.print("Enter a name to search: ");
                 key = input.nextLine().toLowerCase();
