@@ -69,24 +69,4 @@ public class PetDatabase {
         System.out.println("+------------------+");
         System.out.println(counter + " rows in set.");
     }
-
-    // Update pet method
-    public void updatePet(int id, String name, int age) {
-        // Only used to print the message as shown in example
-        String oldName = petArray.get(id).getName();
-        int oldAge = petArray.get(id).getAge();
-        // Changes the age and name to the new input and prints new table
-        petArray.get(id).setAge(age);
-        petArray.get(id).setName(name);
-        System.out.println(oldName + " " + oldAge + " changed to " + name + " " + age);
-        viewPets();
-    }
-
-    // Remove pet method
-    public void removePet(int id) {
-        // Prints message before removing and shows new table
-        System.out.println(id + " " + petArray.get(id).getName() + " " + petArray.get(id).getAge() + " is removed.");
-        petArray.remove(id);
-        viewPets();
-    }
 }
