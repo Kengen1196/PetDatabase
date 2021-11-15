@@ -1,4 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PetDatabase {
     // ArrayList for simplifying arrays
@@ -88,5 +93,45 @@ public class PetDatabase {
         System.out.println(id + " " + petArray.get(id).getName() + " " + petArray.get(id).getAge() + " is removed.");
         petArray.remove(id);
         viewPets();
+    }
+
+    public boolean save(String filename) {
+        try {
+            FileWriter writer = new FileWriter(filename);// writes to the file
+            String newString = "";// used to store the line to be written
+            for (int i = 0; i < petArray.size(); i++) {// loops through entire array
+                newString = petArray.get(i).getName() + "," + petArray.get(i).getAge();// combines age and name in one
+                                                                                       // line separated by comma
+                writer.write(newString + "\n");// writes to the new file
+            }
+            writer.close();
+            System.out.println("Pet Data Saved");
+            return true;
+        } catch (IOException e) {// File Exception
+            System.out.println("An error occured.");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean load(String filename) {
+        petArray = new ArrayList<Pet>();// creates a new array
+        String[] splitLine;// used to separate the String objects
+        Pet tempPet;
+        try {
+            File inputFile = new File(filename);// creates an instance of the file
+            Scanner reader = new Scanner(inputFile);// reads the file
+            while (reader.hasNextLine()) {
+                splitLine = reader.nextLine().split(",");// splits the string on commas
+                tempPet = new Pet(splitLine[0], Integer.valueOf(splitLine[1]));// instantiates a pet
+                petArray.add(tempPet);// inserts new pet
+            }
+            System.out.println("Pet Data Loaded");
+            reader.close();
+            return true;
+        } catch (FileNotFoundException e) {// File Error
+            e.printStackTrace();
+            return false;
+        }
     }
 }

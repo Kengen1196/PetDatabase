@@ -1,8 +1,8 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Pet Database Program");
         // Variables used throughout the program
         Scanner input = new Scanner(System.in);
         PetDatabase database = new PetDatabase();
@@ -15,6 +15,10 @@ public class Main {
         int id;
         // Opening message
         System.out.println("Pet Database Program");
+        File inputFile = new File("Pet_Database.txt");
+        if (inputFile.exists()) {
+            database.load("Pet_Database.txt");
+        }
         // Loops until it is changed
         while (loop) {
             // Menu options
@@ -75,6 +79,7 @@ public class Main {
                 break;
             }
         }
+        database.save("Pet_Database.txt");
         input.close();
     }
 }
