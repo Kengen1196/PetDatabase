@@ -32,7 +32,18 @@ public class PetDatabase {
 
     // Adds pet to array and prints the new table
     public void addPets(String name, int age) {
-        petArray.add(new Pet(name, age));
+        // if the list is under 5 and the ages are between 1 and 20 it will proceed
+        if (petArray.size() < 5 && age > 0 && age <= 20) {
+            petArray.add(new Pet(name, age));
+            // Prints messages otherwise indicating why it failed
+        } else {
+            if (petArray.size() >= 5) {
+                System.out.println("Database is full!");
+            }
+            if (age < 0 || age > 20) {
+                System.out.println("That is not a valid age!");
+            }
+        }
         viewPets();
     }
 
@@ -77,21 +88,37 @@ public class PetDatabase {
 
     // Update pet method
     public void updatePet(int id, String name, int age) {
-        // Only used to print the message as shown in example
-        String oldName = petArray.get(id).getName();
-        int oldAge = petArray.get(id).getAge();
         // Changes the age and name to the new input and prints new table
-        petArray.get(id).setAge(age);
-        petArray.get(id).setName(name);
-        System.out.println(oldName + " " + oldAge + " changed to " + name + " " + age);
+        if (id >= 0 && id < petArray.size() && age <= 20 && age > 0) {
+            // Only used to print the message as shown in example
+            String oldName = petArray.get(id).getName();
+            int oldAge = petArray.get(id).getAge();
+            petArray.get(id).setAge(age);
+            petArray.get(id).setName(name);
+            System.out.println(oldName + " " + oldAge + " changed to " + name + " " + age);
+        } else {
+            if (id < 0 || id >= petArray.size()) {
+                System.out.println("ID does not exist!");
+            }
+            if (age < 1 || age > 20) {
+                System.out.println("That is not a valid age!");
+            }
+        }
         viewPets();
     }
 
     // Remove pet method
     public void removePet(int id) {
         // Prints message before removing and shows new table
-        System.out.println(id + " " + petArray.get(id).getName() + " " + petArray.get(id).getAge() + " is removed.");
-        petArray.remove(id);
+        // If id is within the contraints it will proceed
+        if (id >= 0 && id < petArray.size()) {
+            System.out
+                    .println(id + " " + petArray.get(id).getName() + " " + petArray.get(id).getAge() + " is removed.");
+            petArray.remove(id);
+            // else it prints the message why it does not work
+        } else {
+            System.out.println("That is not a valid ID!");
+        }
         viewPets();
     }
 
