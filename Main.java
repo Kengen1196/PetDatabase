@@ -23,7 +23,7 @@ public class Main {
         while (loop) {
             // Menu options
             System.out.println(
-                    "What would you like to do?\n1) View all pets\n2) Add more pets\n3) Update an exitsing pet\n4) Remove an existing pet\n5) Search pets by name\n6) Search pets by age\n7) Exit program");
+                    "What would you like to do?\n1) View all pets\n2) Add more pets\n3) Update an existing pet\n4) Remove an existing pet\n5) Search pets by name\n6) Search pets by age\n7) Exit program");
             // Allows user to easily see their input
             System.out.print("Your Choice: ");
             // Used in the switch
@@ -39,9 +39,15 @@ public class Main {
                 System.out.print("Add pet ie. name age: ");
                 // split input line by space as it is assumed both are given
                 line = input.nextLine().split(" ");
-                name = line[0];
-                age = Integer.valueOf(line[1]);
-                database.addPets(name, age);
+                // checks if there are 2 inputs
+                if (line.length == 2) {
+                    name = line[0];
+                    age = Integer.valueOf(line[1]);
+                    database.addPets(name, age);
+                } else {
+                    System.out.println("That is not a valid input!");
+                    database.viewPets();
+                }
                 break;
             // Updates pet in array
             case 3:
@@ -51,9 +57,15 @@ public class Main {
                 System.out.print("Enter new name and new age: ");
                 // split input line by space as it is assumed both are given
                 line = input.nextLine().split(" ");
-                name = line[0];
-                age = Integer.valueOf(line[1]);
-                database.updatePet(id, name, age);
+                // checks if there are 2 inputs then proceeds
+                if (line.length == 2) {
+                    name = line[0];
+                    age = Integer.valueOf(line[1]);
+                    database.updatePet(id, name, age);
+                } else {
+                    System.out.println("That is not a valid input!");
+                    database.viewPets();
+                }
                 break;
             // Removes pet in array
             case 4:
@@ -61,7 +73,8 @@ public class Main {
                 id = input.nextInt();
                 input.nextLine();
                 database.removePet(id);
-                // Search pet by name
+                break;
+            // Search pet by name
             case 5:
                 System.out.print("Enter a name to search: ");
                 key = input.nextLine().toLowerCase();
